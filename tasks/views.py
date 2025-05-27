@@ -1,7 +1,11 @@
 from rest_framework import viewsets, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.exceptions import ValidationError
 from .models import Task
 from .serializers import TaskSerializer
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -19,4 +23,8 @@ class TaskViewSet(viewsets.ModelViewSet):
         return Task.objects.none()
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        try:
+            serializer.save(user=self.request.user)
+        except Exception as e:
+            logger.error(f"Ошибка при сохранении задачи: {e}")
+            raise ValidationError("Ошибка при сохранении задачи.")
