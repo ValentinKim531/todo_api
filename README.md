@@ -9,7 +9,7 @@ REST API сервис на Django 5 + DRF + JWT + Docker Compose
 ### 1. Склонируйте репозиторий
 
 ```bash
-git clone https://github.com/your-username/todo_api.git
+git clone https://github.com/ValentinKim531/todo_api.git
 cd todo_api
 ```
 
