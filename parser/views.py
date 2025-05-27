@@ -11,7 +11,6 @@ import os
 
 
 class ScrapeView(APIView):
-    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
@@ -33,4 +32,3 @@ class ScrapeView(APIView):
 class CompanyListView(ListAPIView):
     queryset = AstanaHubCompany.objects.all().order_by("created_at")[:10]
     serializer_class = AstanaHubCompanySerializer
-    permission_classes = [IsAuthenticated]
